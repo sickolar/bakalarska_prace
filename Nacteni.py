@@ -2,7 +2,7 @@ import pydicom
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from matplotlib import widgets
+from matplotlib.widgets import Slider
 
 #Nacteni souboru, vythoreni 4D pole (cas, rez, vyska, sirka)
 def data_load(path):
@@ -13,6 +13,7 @@ def data_load(path):
         if file.endswith('.dcm'):
             dcm = os.path.join(path, file)
             dcm_files.append(dcm)
+
     print(dcm_files)
 
     if dcm_files == []: #osetreni - nenalezeni souboru
@@ -21,22 +22,35 @@ def data_load(path):
     else:
         print(f'Nalezeno {len(dcm_files)} DICOM souboru')
 
-    for i, file_path in enumerate(dcm_files): #ocislovani a prochazeni souboru po jednom
-        print(f'snime {i}/{len(dcm_files)}')
-
+    for file_path in dcm_files: #prochazeni nalezenych dcm souboru
         file = pydicom.dcmread(file_path) #nacteni souboru
+        image = file.pixel_array #zisk obrazovych dat
+        data.append(image) #ulozeni vsech obrazovych dat do seznamu
 
-        plt.figure(figsize=(8,8)) #zobrazeni souboru
-        plt.imshow(file.pixel_array, cmap='gray')
-        plt.title(f'Obrazek cislo {i+1} - {os.path.basename(file_path)}')
-        plt.show()
+    data = np.array(data) #vlozeni do numpy pole
 
-        if i < len(dcm_files) - 1:
-            input('Enter pro dalsi obrazek')
-        else:
-            input('Posledni obrazek')
+    number_of_images = len(data)#pocet nactenych obrazku
 
-        plt.close()
+
+    fig, ax = plt.subplots() #fig - cele okno, ax - plocha pro vykresleni
+    plt.subplots_adjust(bottom=0.2) #pro slider
+    image_displayed = ax.imshow(data[0], cmap='grey') #imshow, pro prvni obrazek, ax konkretni osa
+    ax.set_title(f'Snimek 1 z {number_of_images}')
+
+    #Slider
+    slider_position = plt.axes([0.2, 0.05, 0.6, 0.03]) #Osa pro slider - kde se bude nachazet v ramci fig
+    slider = Slider(slider_position, label='Snímek', valmin=0, valmax=number_of_images - 1, valinit=0, valstep=1)#nastaveni slideru
+
+    slider.on_changed(lambda val: slider_update(slider, data, fig, ax, image_displayed, number_of_images)) #lambad premostovaci funkce - prijme value, preda ji slider update
+    plt.show() #zobrazi otevrenou fig
+#Funkce pro posun slideru
+def slider_update(slider, data, fig, ax, image_displayed, number_of_images):
+    i = int(slider.val) #ziska kde se nachazime v ramci slideru
+    image_displayed.set_data(data[i]) #zobrazi snimek podle pozice slideru
+    ax.set_title(f'Snímek {i + 1} z {number_of_images}') #zmeni popisek
+    fig.canvas.draw_idle() #aktualizujeme zobrazeny obrazek.
+
+
 
 
 
