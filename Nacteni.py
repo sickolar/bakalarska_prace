@@ -4,7 +4,7 @@ import numpy as np
 import os
 from matplotlib.widgets import Slider
 
-#Nacteni souboru, vythoreni 4D pole (cas, rez, vyska, sirka)
+#Nacteni souboru, vythoreni 3D pole (rez, vyska, sirka)
 def data_load(path):
     dcm_files = []
     data = []
@@ -45,7 +45,7 @@ def data_load(path):
     plt.show() #zobrazi otevrenou fig
 #Funkce pro posun slideru
 def slider_update(slider, data, fig, ax, image_displayed, number_of_images):
-    i = int(slider.val) #ziska kde se nachazime v ramci slideru
+    i = int(slider.val) #nacte, kde se nachazime na slideru - rez
     image_displayed.set_data(data[i]) #zobrazi snimek podle pozice slideru
     ax.set_title(f'Snímek {i + 1} z {number_of_images}') #zmeni popisek
     fig.canvas.draw_idle() #aktualizujeme zobrazeny obrazek.
