@@ -4,7 +4,7 @@ import pydicom
 import napari
 
 #Nacteni 4d (cas, rez, vyska, sirka)
-def data_load_4d(path):
+def zobrazeni_dcm_4d(path):
     time_stamps = os.listdir(path) #Nahrani slozek (cas) s daty (rez), pozor na SORTING
     dcm_files = []
     temp_data = []
@@ -28,14 +28,7 @@ def data_load_4d(path):
         dcm_files = []
 
     data = np.array(data) #prevod na numpy array
-    return data
+    viewer = napari.Viewer()
+    viewer.add_image(data, colormap='gray', name = 'DCE-MRI')
+    napari.run()
 
-
-
-data = data_load_4d(r'C:\Users\andre\OneDrive\Plocha\School\BTB_3\Bakalářská práce\subjekty\pokus_1\manifest-data1407430404196\QIN Breast DCE-MRI\QIN-Breast-DCE-MRI-BC01\05-15-1996-NA-Breast CE-49782')
-
-print(data.shape)
-#vytvoreni vieweru
-viewer = napari.Viewer()
-viewer.add_image(data, colormap='gray', name='DCE-MRI', contrast_limits=[np.min(data), np.max(data)])  #contrast_limits moc nefunguje, furt mi to prijde zlvastni
-napari.run()
