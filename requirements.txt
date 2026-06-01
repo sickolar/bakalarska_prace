@@ -1,0 +1,10 @@
+numpy
+pandas
+scipy
+matplotlib
+seaborn
+SimpleITK
+optuna
+pydicom
+nibabel
+napari[all]
