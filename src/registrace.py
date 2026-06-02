@@ -711,8 +711,8 @@ if __name__ == "__main__":
     #data_save: Adresář, do kterého budou uloženy výsledné 4D NIfTI objemy (.nii.gz) a doprovodné CSV tabulky metrik.
     #pacient_id: Identifikátor pacienta vložený do názvů výstupních souborů.
 
-    dcm_data = r'C:\Users\andre\OneDrive\Plocha\School\BTB_3\Bakalářská práce\subjekty\pokus_1\manifest-data1407430404196\QIN Breast DCE-MRI\QIN-Breast-DCE-MRI-BC01\04-24-1996-NA-Breast CE-59716'
-    data_save = r'C:\Bakalarka\Nifty_files\casy'
+    dcm_data = r'Vase_cesta_k_datum'
+    data_save = r'Vase_cesta_k_adresari_pro_ulozeni'
     pacient_id = 'Testovaci_Pacient'
 
     start = time.time()
