@@ -3,6 +3,7 @@ import SimpleITK as sitk
 import Nacteni_image
 import numpy as np
 import csv
+import time
 
 def registration_full_rigid(read_path, save_path, pacient_id):
     """
@@ -702,3 +703,37 @@ def registration_full_demons(read_path, save_path, pacient_id):
         writer.writerow(['Časový okamžik', 'MI_skóre', 'MSE_skóre'])
         for timee, mi, mse in zip(time_stamps, mi_scores, mse_scores):
             writer.writerow([timee, mi, mse])
+
+
+if __name__ == "__main__":
+    #Před spuštěním skriptu je nutné nastavit lokální cesty k testovacím datům.
+    #dcm_data: Absolutní cesta ke složce pacienta, která obsahuje chronologicky řazené podsložky
+    #data_save: Adresář, do kterého budou uloženy výsledné 4D NIfTI objemy (.nii.gz) a doprovodné CSV tabulky metrik.
+    #pacient_id: Identifikátor pacienta vložený do názvů výstupních souborů.
+
+    dcm_data = r'C:\Users\andre\OneDrive\Plocha\School\BTB_3\Bakalářská práce\subjekty\pokus_1\manifest-data1407430404196\QIN Breast DCE-MRI\QIN-Breast-DCE-MRI-BC01\04-24-1996-NA-Breast CE-59716'
+    data_save = r'C:\Bakalarka\Nifty_files\casy'
+    pacient_id = 'Testovaci_Pacient'
+
+    start = time.time()
+
+    # Příklad spuštění rigidní registrace (výchozí nastavení)
+    #print('Rigidní registrace spuštěna')
+    #registration_full_rigid(dcm_data, data_save, pacient_id)
+
+    #Pro provedení nelineárních B-spline nebo Demons metod odstraňte komentář níže:
+
+    print('B-spline MSE spuštěna')
+    registration_full_bspline_mse(dcm_data, data_save, pacient_id)
+
+    #print('B-spline MI spuštěna')
+    #registration_full_bspline_mi(dcm_data, data_save, pacient_id)
+
+    #print('Algoritmus demons spuštěn')
+    #registration_full_demons(dcm_data, data_save, pacient_id)
+
+    minutes, seconds = divmod(time.time() - start, 60)
+    hours, minutes = divmod(minutes, 60)
+    result = f'Cas vypoctu: {int(hours)} hodin, {int(minutes)}, minut a {int(seconds)} sekund'
+    print(result)
+    print("Proces registrace byl úspěšně dokončen. Data byla uložena na disk.")
