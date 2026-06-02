@@ -4,7 +4,7 @@ Tento repozitář obsahuje zdrojové kódy k bakalářské práci zaměřené na
 
 Během vyšetření dochází vlivem dýchání a přirozeného pohybu pacienta k deformacím tkáně, které ztěžují diagnostiku. Cílem implementovaných metod je automatická kompenzace tohoto pohybu pomocí registračních algoritmů a následná kvantifikace jejich úspěšnosti.
 
-Projekt byl vyvíjen a primárně testován na standardizovaném veřejném datasetu **QIN-Breast-DCE-MRI** z databáze The Cancer Imaging Archive (TCIA).
+Projekt byl vyvíjen a primárně testován na standardizovaném veřejném datasetu [QIN-Breast-DCE-MRI](https://www.cancerimagingarchive.net/collection/qin-breast-dce-mri/) z databáze The Cancer Imaging Archive (TCIA)
 
 ## Implementované funkce
 
@@ -119,3 +119,27 @@ python main.py
 - **Přizpůsobení grafů a statistik:** Při volání analytických a vizualizačních funkcí z `grafy.py` (v souboru `main.py`) je nutné ručně upravit vstupní argumenty podle toho, jakou metodu vyhodnocujete. Nezapomeňte správně přepisovat suffixy (např. 'MSE' na 'MI' nebo 'Demons'), názvy Optuna databází a cesty k cílovým CSV tabulkám.
 - **Doba běhu:** Nelineární registrace 4D obrazů je výpočetně náročný proces. Zpracování jednoho pacienta může v závislosti na hardwaru trvat i několik hodin.
 - **Vizualizace** Soubor `src/niftii_load.py` obsahuje několik předpřipravených režimů zobrazení v Napari (barevné překryvy, šedotónové zobrazení, TRE body, zobrazení v mřížce). Před spuštěním funkce `niftii_view()` je vhodné upravit zakomentované/odkomentované řádky podle požadovaného způsobu vizualizace.
+## Prohlášení o využití umělé inteligence (AI)
+
+Při vývoji tohoto projektu byly využity nástroje na bázi velkých jazykových modelů (LLM). Umělá inteligence sloužila výhradně jako programátorský asistent. Konkrétně byla využita pro:
+* Nápovědu při syntaxi a formátování zdrojového kódu.
+* Návrh a generování pokročilých statistických vizualizací a grafů (knihovny `matplotlib`, `seaborn`).
+* Stylizaci a strukturování dokumentace (README).
+
+Teoretický základ, volba registračních metod a výchozí nastavení hyperparametrů vycházejí z publikovaných vědeckých článků, které jsou řádně citovány v textu bakalářské práce. Samotná softwarová implementace, architektura projektu, a interpretace výsledků jsou mým vlastním autorským dílem.
+
+**Plný text bakalářské práce je k dispozici zde:** [Srovnání algoritmů pro pružnou registraci dynamických MR skenů prsu]( https://www.vut.cz/studenti/zav-prace/detail/175726.)
+
+## Použitá data a software (Citace)
+
+- **Dataset**
+HUANG, W., TUDORICA, A., CHUI, S., KEMMER, K., NAIK, A., TRO-
+XELL, M., OH, K., ROY, N., AFZAL, A. a HOLTORF, M. Variations of dy-
+namic contrast-enhanced magnetic resonance imaging in evaluation of breast
+cancer therapy response: a multicenter data analysis challenge (QIN Breast
+DCE-MRI) [online datová sada]. Version 2. The Cancer Imaging Archive, 2014.
+Dostupné z: https://doi.org/10.7937/k9/tcia.2014.a2n1ixox. [cit. 2026-06-02].
+- **SimpleITK (registrace obrazu)**
+LOWEKAMP, Bradley C.; CHEN, David T.; IBÁÑEZ, Luis a BLEZEK, Daniel. The Design of SimpleITK. Online. Frontiers in Neuroinformatics. 2013, roč. 7. ISSN 1662-5196. Dostupné z: https://doi.org/10.3389/fninf.2013.00045. [cit. 2026-06-02].
+- **Optuna (optimalizace hyperparametrů)**
+AKIBA, Takuya; SANO, Shotaro; YANASE, Toshihiko; OHTA, Takeru a KOYAMA, Masanori. Optuna: A Next-generation Hyperparameter Optimization Framework. Online. KDD '19: Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining. 25 July 2019, s. 2623 - 2631. Dostupné z: https://doi.org/10.1145/3292500.3330701. [cit. 2026-06-02].
