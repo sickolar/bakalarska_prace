@@ -67,6 +67,8 @@ if __name__ == '__main__':
     #grafy.graf_optuna(study_name = f'mse_optimize_{pacient_id}', db_name = fr'{data_save}\mse_optuna_{pacient_id}.db', suffix = 'MSE', pacient_id = pacient_id, save_path = data_save)
 
     #Vývoj MSE a MI metrik v čase z csv tabulek
+    #Funguje pouze pro pacient_id = 'Testovaci_Pacient', pro přidání dalšího pacienta
+    #je potřeba upravit slovník ve funkci.
     #grafy.zpracuj_a_vykresli_data(data_save, suffix=pacient_id)
 
     #Výpočet TRE a individuální boxploty (vyžaduje csv s body)
@@ -84,3 +86,4 @@ if __name__ == '__main__':
     minutes, seconds = divmod(time.time() - start, 60)
     hours, minutes = divmod(minutes, 60)
     result = f'Cas vypoctu: {int(hours)} hodin, {int(minutes)}, minut a {int(seconds)} sekund'
+    print('result')

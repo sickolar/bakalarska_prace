@@ -398,14 +398,9 @@ def zpracuj_a_vykresli_data(slozka_s_daty, suffix='Testovaci'):
         Přípona pro názvy výstupních obrázků (výchozí je "Testovaci").
     """
     #Definice mapování ID pacientů pomocí slovníku
+    #Pro přidání pacienta je potřeba přidat 'Nazev pacienta': 'tak jak se zobrazí v grafu'
     pacienti_mapa = {
-        '3': 'Pacient 3',
-        '5': 'Pacient 5',
-        '6': 'Pacient 6',
-        '7': 'Pacient 7',
-        '8': 'Pacient 8',
-        '9': 'Pacient 9',
-        '10': 'Pacient 10'
+        'Testovaci_Pacient': 'Testovací pacient'
     }
 
     metody_kody = {
