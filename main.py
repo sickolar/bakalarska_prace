@@ -86,4 +86,4 @@ if __name__ == '__main__':
     minutes, seconds = divmod(time.time() - start, 60)
     hours, minutes = divmod(minutes, 60)
     result = f'Cas vypoctu: {int(hours)} hodin, {int(minutes)}, minut a {int(seconds)} sekund'
-    print('result')
+    print(result)
